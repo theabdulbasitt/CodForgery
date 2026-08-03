@@ -2,9 +2,7 @@ import Groq from 'groq-sdk';
 import 'dotenv/config';
 import { filesystemToolSchemas, filesystemHandlers } from './tools/filesystem.js';
 import { SYSTEM_PROMPT } from './prompts.js';
-
-
-const client = new Groq({ apiKey: process.env['GROQ_API_KEY'] });
+import { callGroqWithRetry } from './groqClient.js';
 
 const tools = filesystemToolSchemas;
 const handlers = filesystemHandlers;
@@ -14,13 +12,21 @@ let messages: Groq.Chat.CompletionCreateParams['messages'] = [
     { role: 'user', content: 'What is in app.ts?' }
 ];
 
+//const model = 'not-a-real-model';
 const model = 'llama-3.3-70b-versatile';
 const MAX_ITERATIONS = 10; // safety net: never loop forever
 
 for (let turn = 1; turn <= MAX_ITERATIONS; turn++) {
     console.log(`\n=== Turn ${turn} ===`);
 
-    const response = await client.chat.completions.create({ model, messages, tools });
+    let response;
+    try {
+        response = await callGroqWithRetry({ model, messages, tools });
+    } catch (err) {
+        console.error(`\n❌ Fatal: ${(err as Error).message}`);
+        console.error('Stopping agent loop.');
+        break;
+    }
     const responseMessage = response.choices[0].message;
 
     console.log('finish_reason:', response.choices[0].finish_reason);

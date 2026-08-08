@@ -1,15 +1,16 @@
 import Groq from 'groq-sdk';
 import 'dotenv/config';
 import { filesystemToolSchemas, filesystemHandlers } from './tools/filesystem.js';
+import { searchToolSchemas, searchHandlers } from './tools/search.js';
 import { SYSTEM_PROMPT } from './prompts.js';
 import { callGroqWithRetry } from './groqClient.js';
 
-const tools = filesystemToolSchemas;
-const handlers = filesystemHandlers;
+const tools = [...filesystemToolSchemas, ...searchToolSchemas];
+const handlers = { ...filesystemHandlers, ...searchHandlers };
 
 let messages: Groq.Chat.CompletionCreateParams['messages'] = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: 'What is in app.ts?' }
+    { role: 'user', content: 'Check my codebase for security vulnerabilities' }
 ];
 
 //const model = 'not-a-real-model';

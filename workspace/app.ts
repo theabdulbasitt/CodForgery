@@ -1,7 +1,7 @@
 import express from 'express';
 import mysql from 'mysql';
 
-const API_KEY = "sk_live_51Hz9k2LmN8qRvX3wPzT7Yb";
+const API_KEY = "sk_live_51Hz9k2LmN8qRvX3wPzT7Yb";    // dummy api key
 
 const db = mysql.createConnection({
     host: 'localhost',

@@ -28,7 +28,7 @@ Example patterns for common security-relevant APIs:
                     },
                     glob: {
                         type: 'string',
-                        description: 'Optional file extension filter, e.g. ".ts", ".js", ".tsx". Use an empty string to search all files.'
+                        description: 'Optional file extension filter, e.g. ".ts". Leave as an empty string unless you have already confirmed the file extensions in this workspace via list_files — searching with a wrong or guessed extension will silently return zero results.'
                     }
                 },
                 required: ['pattern', 'glob']

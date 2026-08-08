@@ -2,18 +2,18 @@ import Groq from 'groq-sdk';
 import 'dotenv/config';
 import { filesystemToolSchemas, filesystemHandlers } from './tools/filesystem.js';
 import { searchToolSchemas, searchHandlers } from './tools/search.js';
+import { reportToolSchemas, reportHandlers } from './tools/report.js';
 import { SYSTEM_PROMPT } from './prompts.js';
 import { callGroqWithRetry } from './groqClient.js';
 
-const tools = [...filesystemToolSchemas, ...searchToolSchemas];
-const handlers = { ...filesystemHandlers, ...searchHandlers };
+const tools = [...filesystemToolSchemas, ...searchToolSchemas, ...reportToolSchemas];
+const handlers = { ...filesystemHandlers, ...searchHandlers, ...reportHandlers };
 
 let messages: Groq.Chat.CompletionCreateParams['messages'] = [
     { role: 'system', content: SYSTEM_PROMPT },
     { role: 'user', content: 'Check my codebase for security vulnerabilities' }
 ];
 
-//const model = 'not-a-real-model';
 const model = 'llama-3.3-70b-versatile';
 const MAX_ITERATIONS = 10; // safety net: never loop forever
 

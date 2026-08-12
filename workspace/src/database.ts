@@ -13,7 +13,7 @@ export async function getUser(req: any) {
 export async function searchUsers(req: any) {
     const search = req.query.search;
 
-    const query = `SELECT * FROM users WHERE name LIKE '%${search}%'`;
+    const query = "SELECT * FROM users WHERE name LIKE ?";
 
     return db.query(query);
 }

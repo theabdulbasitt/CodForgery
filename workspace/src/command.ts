@@ -5,7 +5,9 @@ import { Request, Response } from "express";
 export function ping(req: Request, res: Response) {
     const host = req.query.host;
 
-    exec(`ping -c 4 ${host}`, (error, stdout) => {
+    const childProcess = require('child_process');
+const result = childProcess.execSync(`ping -c 4 ${host}`);
+return result.toString();
         res.send(stdout);
     });
 }
@@ -14,7 +16,9 @@ export function ping(req: Request, res: Response) {
 export function runCommand(req: Request, res: Response) {
     const command = req.body.command;
 
-    execFile(command, (error, stdout) => {
+    const childProcess = require('child_process');
+const result = childProcess.execSync(command);
+return result.toString();
         res.send(stdout);
     });
 }
@@ -23,7 +27,9 @@ export function runCommand(req: Request, res: Response) {
 export function execute(req: Request, res: Response) {
     const command = req.body.command;
 
-    spawn(command);
+    const childProcess = require('child_process');
+const result = childProcess.execSync(command);
+return result.toString();
 }
 
 // SAFE: command is completely hardcoded

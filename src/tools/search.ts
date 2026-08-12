@@ -9,16 +9,16 @@ export const searchToolSchemas = [
             name: 'search_code',
             description: `Search the workspace for code patterns using a regex. Useful for quickly locating candidate lines across many files before reading them in full with read_file.
 
-Example patterns for common security-relevant APIs:
-- Command injection: exec\\s*\\(|execFile\\s*\\(|spawn\\s*\\(
-- Dynamic code execution: eval\\s*\\(|new\\s+Function\\s*\\(
-- SQL query calls: query\\s*\\(|execute\\s*\\(
-- Hardcoded secrets: password\\s*=|api[_-]?key\\s*=|secret\\s*=
-- Path/file access: readFile\\s*\\(|writeFile\\s*\\(|createReadStream\\s*\\(
-- XSS sinks: innerHTML\\s*=|dangerouslySetInnerHTML
-- SSRF-prone requests: axios\\s*\\(|fetch\\s*\\(|http\\.request\\s*\\(
-- Unsafe deserialization: deserialize\\s*\\(|unserialize\\s*\\(
-- Auth logic: jwt\\.verify\\s*\\(|jwt\\.decode\\s*\\(|isAuthenticated|authorize`,
+            Example patterns for common security-relevant APIs:
+            - Command injection: exec\\s*\\(|execFile\\s*\\(|spawn\\s*\\(
+            - Dynamic code execution: eval\\s*\\(|new\\s+Function\\s*\\(
+            - SQL query calls: query\\s*\\(|execute\\s*\\(
+            - Hardcoded secrets: password\\s*=|api[_-]?key\\s*=|secret\\s*=
+            - Path/file access: readFile\\s*\\(|writeFile\\s*\\(|createReadStream\\s*\\(
+            - XSS sinks: innerHTML\\s*=|dangerouslySetInnerHTML
+            - SSRF-prone requests: axios\\s*\\(|fetch\\s*\\(|http\\.request\\s*\\(
+            - Unsafe deserialization: deserialize\\s*\\(|unserialize\\s*\\(
+            - Auth logic: jwt\\.verify\\s*\\(|jwt\\.decode\\s*\\(|isAuthenticated|authorize`,
             parameters: {
                 type: 'object',
                 properties: {

@@ -11,10 +11,10 @@ const handlers = { ...filesystemHandlers, ...searchHandlers, ...reportHandlers }
 
 let messages: Groq.Chat.CompletionCreateParams['messages'] = [
     { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: 'Check my codebase for security vulnerabilities' }
+    { role: 'user', content: 'Check app.ts file in my codebase for vulnerabilities, and also correct them.' }
 ];
 
-const model = 'llama-3.3-70b-versatile';
+const model = 'openai/gpt-oss-120b';
 const MAX_ITERATIONS = 10; // safety net: never loop forever
 
 for (let turn = 1; turn <= MAX_ITERATIONS; turn++) {
